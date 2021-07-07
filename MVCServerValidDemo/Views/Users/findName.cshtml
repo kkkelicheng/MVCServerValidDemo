@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查找姓名</title>
+    <style type="text/css">
+        #nameinput {
+            background-color:yellow;
+            border:1px solid red;
+        }
+        a {
+            text-decoration: none
+        }
+        ul {
+            margin:0px;
+            padding:0px
+        }
+  
+    </style>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+     
+
+        $(function() {
+            $("#nameinput").keyup(function () {
+                var kname = $(this).val();
+                $("#ulempty").empty();
+                if (kname.length == 0) {
+                    return;
+                }
+                alert(kname)
+                $.ajax({
+                    url: "GetUserNames",
+                    data: { "keyword": kname },
+                    success: function (sResult)
+                    {
+                        fetchNameSuccess(sResult);
+                    },
+                    error: function(eResult) {
+                        alert(eResult);
+                    }
+                })
+            })
+        })
+
+        function fetchNameSuccess(sResult) {
+            if (typeof(sResult) == 'string') {
+                alert("sResult is string");
+                if (sResult == "0") {
+                    alert("sResult is 0");
+                }
+            }
+            else if(sResult instanceof Array){
+                var arrayResult = Array.from(sResult);
+                arrayResult.forEach((obj) => {
+                    var name = obj.Account;
+                    $("#ulempty").append("<li class='li_clickItem' onclick='liClickAction(this)'>" + name + "</li>");
+                });
+            }
+        }
+
+        function liClickAction(obj) {
+            var index = $(obj).index();
+            alert(index);
+        }
+
+        function fetchNameError(eResult) {
+
+        }
+
+        function bindLIClickEvent(sResult) {
+
+        }
+    </script>
+</head>
+<body>
+    <div style="width:500px;margin:auto">
+        在下面输入人名：<br />
+        <input type="text" name="name" id="nameinput"/>
+        <ul id="ulempty" style="list-style-type:none ; padding:0px ; margin:0px">
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>register</title>
+</head>
+<body>
+    <form action="UserRegister" method="post">
+        <table>
+            <tr>
+                <td>账号：</td>
+                <td><input type="text" name="Account" id="Account" /></td>
+                <td id="op_account">@Html.ValidationMessage("Account")</td>
+            </tr>
+            <tr>
+                <td>密码1：</td>
+                <td><input type="password" name="Password1" id="Pwd" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>确认密码：</td>
+                <td><input type="password" name="Password2" id="NickName" /></td>
+                <td>@Html.ValidationMessage("Password2")</td>
+            </tr>
+            <tr>
+                <td>年纪：</td>
+                <td><input type="text" name="age"></td>
+                <td>@Html.ValidationMessage("Age")</td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td><input type="text" name="Email"></td>
+                <td>@Html.ValidationMessage("AccEmailount")</td>
+            </tr>
+
+            <tr>
+                <td colspan="3"><input id="btnSubmit" type="submit" value="确定后提交" /></td>
+            </tr>
+        </table>
+    </form>
+    <!--展示自定义错误信息-->
+    @Html.ValidationMessage("CustomErrorkey")
+</body>
+</html>
